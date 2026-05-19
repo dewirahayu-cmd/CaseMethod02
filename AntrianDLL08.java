@@ -16,12 +16,14 @@ public class AntrianDLL08 {
         return head == null;
     }
 
-    // method tambahAntrian() menambahkan pembeli baru ke bagian akhir antrian
-    public void tambahAntrian(String namaPembeli, String noHp) {
+    // method generateNo() digunakan untuk membuat nomor antrian otomatis
+    public int generateNo() {
         counterAntrian++;
+        return counterAntrian;
+    }
 
-        Pembeli08 pembeli = new Pembeli08(counterAntrian, namaPembeli, noHp);
-
+    // method tambahAntrian() menambahkan pembeli baru ke bagian akhir antrian
+    public void tambahAntrian(Pembeli08 pembeli) {
         NodeAntrian08 newNode = new NodeAntrian08(pembeli);
 
         // jika antrian masih kosong, node baru langsung menjadi head sekaligus tail
@@ -33,8 +35,6 @@ public class AntrianDLL08 {
             newNode.prev = tail;   
             tail = newNode;        
         }
-
-        System.out.println("Antrian berhasil ditambahkan dengan nomor: " + counterAntrian);
     }
 
     // method cetakAntrian() menampilkan seluruh antrian yang ada

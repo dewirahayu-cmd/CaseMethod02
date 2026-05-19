@@ -7,8 +7,12 @@ public class MainRoyalDelish08 {
         Scanner scan = new Scanner(System.in);
 
         AntrianDLL08 antrian = new AntrianDLL08();
-
         PesananDLL08 pesananList = new PesananDLL08();
+
+        // penambahan data awal menggunakan konstruktor 
+        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Ainra", "08224500000"));
+        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Danra", "08224511111"));
+        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Sanri", "08224522222"));
 
         int pilihan;
 
@@ -33,7 +37,10 @@ public class MainRoyalDelish08 {
                     String nama = scan.nextLine();
                     System.out.print("No HP        : ");
                     String noHp = scan.nextLine();
-                    antrian.tambahAntrian(nama, noHp);
+                    int noAntrian = antrian.generateNo();
+                    Pembeli08 pembeliBaru = new Pembeli08(noAntrian, nama, noHp);
+                    antrian.tambahAntrian(pembeliBaru);
+                    System.out.println("Antrian berhasil ditambahkan dengan nomor: " + noAntrian);
                     break;
 
                 case 2:
@@ -42,9 +49,9 @@ public class MainRoyalDelish08 {
 
                 case 3:
                     System.out.print("Nomor Antrian yang dipanggil : ");
-                    int noAntrian = scan.nextInt();
+                    int noCari = scan.nextInt();
                     scan.nextLine();
-                    Pembeli08 pembeli = antrian.hapusAntrian(noAntrian);
+                    Pembeli08 pembeli = antrian.hapusAntrian(noCari);
 
                     if (pembeli != null) {
                         System.out.print("Kode Pesanan  : ");
@@ -57,7 +64,7 @@ public class MainRoyalDelish08 {
                         scan.nextLine();
 
                         // buat objek Pesanan menggunakan konstruktor
-                        // lalu tambahkan ke DLL pesanan menggunakan addLast
+                        // lalu tambahkan ke DLL pesanan
                         Pesanan08 pesanan = new Pesanan08(kode, namaPesanan, harga, pembeli.namaPembeli);
                         pesananList.tambahPesanan(pesanan);
 
