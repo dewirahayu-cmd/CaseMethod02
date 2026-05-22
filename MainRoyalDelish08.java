@@ -9,10 +9,13 @@ public class MainRoyalDelish08 {
         AntrianDLL08 antrian = new AntrianDLL08();
         PesananDLL08 pesananList = new PesananDLL08();
 
-        // penambahan data awal menggunakan konstruktor 
-        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Ainra", "08224500000"));
-        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Danra", "08224511111"));
-        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Sanri", "08224522222"));
+        // data pembeli keempat ditambahkan agar memenuhi syarat
+        // minimal 4 data pembeli yang sudah ada di antrian sejak program dijalankan (yang sebekumnya ada 3)
+        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Dewi", "08224500000"));
+        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Muji", "08224511111"));
+        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Rahayu", "08224522222"));
+        // modifikasi data pembeli ke-4 ditambahkan sebagai data dummy awal
+        antrian.tambahAntrian(new Pembeli08(antrian.generateNo(), "Kelas1D", "08224533333"));
 
         int pilihan;
 

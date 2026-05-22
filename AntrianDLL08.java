@@ -1,8 +1,8 @@
 // Class AntrianDLL08 mengimplementasikan struktur data Double Linked List
 public class AntrianDLL08 {
-    NodeAntrian08 head;   
-    NodeAntrian08 tail;  
-    int counterAntrian;   
+    NodeAntrian08 head;
+    NodeAntrian08 tail;
+    int counterAntrian;
 
     // konstruktor menginisialisasi antrian dalam kondisi kosong
     public AntrianDLL08() {
@@ -31,13 +31,15 @@ public class AntrianDLL08 {
             head = tail = newNode;
         } else {
             // sambungkan node baru ke belakang tail yang ada saat ini
-            tail.next = newNode;   
-            newNode.prev = tail;   
-            tail = newNode;        
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
         }
     }
 
-    // method cetakAntrian() menampilkan seluruh antrian yang ada
+    // modifikasi method cetakAntrian() diubah agar menampilkan total jumlah pembeli
+    // yang sedang mengantri di bagian bawah tabel
+
     public void cetakAntrian() {
         if (isEmpty()) {
             System.out.println("Antrian kosong.");
@@ -49,15 +51,29 @@ public class AntrianDLL08 {
         System.out.println("==============================");
         System.out.printf("%-12s %-15s %s%n", "No Antrian", "Nama", "No HP");
 
+        // modifikasi variabel counter untuk menghitung jumlah pembeli yang dicetak
+        // variabel jumlahPembeli diinisialisasi 0 sebagai counter
+        // yang akan menghitung berapa banyak pembeli yang ada di antrian
+        int jumlahPembeli = 0;
+
         // mulai dari head, telusuri setiap node sampai current bernilai null
         NodeAntrian08 current = head;
         while (current != null) {
             System.out.printf("%-12d %-15s %s%n",
-                current.data.noAntrian,
-                current.data.namaPembeli,
-                current.data.noHp);
+                    current.data.noAntrian,
+                    current.data.namaPembeli,
+                    current.data.noHp);
+
+            // modifikasi setiap kali satu pembeli berhasil dicetak, counter bertambah 1
+            jumlahPembeli++;
+
             current = current.next; // pindah ke node berikutnya
         }
+
+        // msetelah semua node selesai ditelusuri, cetak garis pemisah
+        // lalu tampilkan total jumlah pembeli yang sedang mengantri di bawah tabel
+        System.out.println("------------------------------");
+        System.out.println("Total Pembeli Mengantri : " + jumlahPembeli + " orang");
     }
 
     // method hapusAntrian() menghapus node antrian berdasarkan nomor antrian
@@ -85,7 +101,7 @@ public class AntrianDLL08 {
             head = tail = null;
         }
         // kasus 2: node yang dihapus adalah head
-        // head dipindahkan ke node berikutnya, lalu prev head baru diset null
+        // head dipindahkan ke node berikutnya, lalu prev head baru diset ke null
         else if (current == head) {
             head = head.next;
             head.prev = null;
@@ -99,8 +115,8 @@ public class AntrianDLL08 {
         // kasus 4: node yang dihapus berada di tengah
         // sambungkan langsung node sebelum dan sesudah node yang dihapus
         else {
-            current.prev.next = current.next; 
-            current.next.prev = current.prev; 
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
         }
 
         return current.data;
